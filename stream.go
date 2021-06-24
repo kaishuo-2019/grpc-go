@@ -46,6 +46,12 @@ import (
 	"google.golang.org/grpc/status"
 )
 
+func init()  {
+	fmt.Printf("FTF init in grpc-go \n")
+	fmt.Printf("FTF init in grpc-go \n")
+	fmt.Printf("FTF init in grpc-go \n")
+}
+
 // StreamHandler defines the handler called by gRPC server to complete the
 // execution of a streaming RPC. If a StreamHandler returns an error, it
 // should be produced by the status package, or else gRPC will use
