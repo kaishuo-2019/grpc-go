@@ -26,6 +26,7 @@ import (
 	"strconv"
 	"sync"
 	"time"
+	"fmt"
 
 	"golang.org/x/net/trace"
 	"google.golang.org/grpc/balancer"
@@ -964,7 +965,11 @@ func (a *csAttempt) recvMsg(m interface{}, payInfo *payloadInfo) (err error) {
 			}
 			return io.EOF // indicates successful end of stream.
 		}
-		return toRPCErr(err)
+		ftfErr:= toRPCErr(err)
+		fmt.Printf("FTF recvMsg recv err=%s \n",ftfErr.Error())
+		if ftfErr.Error() != "connection error: desc = transport is closing"{
+			return ftfErr
+		}
 	}
 	if a.trInfo != nil {
 		a.mu.Lock()
